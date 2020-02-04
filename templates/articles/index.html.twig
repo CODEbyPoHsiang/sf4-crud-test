@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+    {% if articles %}
+        <table id="articles" class="table table-striped">
+            <thead>
+                <tr>
+                    <th width="10%">姓名</th>
+                    <th width="10%">電話</th>
+                    <th width="20%">電子信箱</th>
+                    <th width="30%">地址</th>
+                    <th colspan=2>操作</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.name }}</td>
+                    <td>{{ article.phone }}</td>
+                    <td>{{ article.email }}</td>
+                    <td>{{ article.city }} {{ article.postcode }} {{ article.township }} {{ article.address }}</td>
+                    <td>
+                    <a href="/article/edit/{{ article.id }}" class="btn btn-secondary" data-id="{{ article.id }}">編輯</a>
+                        <a href="#" class="btn btn-danger delete-article" data-id="{{ article.id }}">刪除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>無任何資料可以顯示</p>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
+{% endblock %}
